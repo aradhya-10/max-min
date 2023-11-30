@@ -1,39 +1,43 @@
-public class FindMax {
+public class FindMax<T extends Comparable<T>> {
+    private T var1;
+    private T var2;
+    private T var3;
 
-    public static <T extends Comparable<T>> T findMax(T obj1, T obj2, T obj3) {
-        T max = obj1;
+    public FindMax(T var1, T var2, T var3) {
+        this.var1 = var1;
+        this.var2 = var2;
+        this.var3 = var3;
+    }
 
-        if (obj2.compareTo(max) > 0) {
-            max = obj2;
+    public T testMaximum() {
+        return FindMax.findMax(var1, var2, var3);
+    }
+
+    public static <T extends Comparable<T>> T findMax(T var1, T var2, T var3) {
+        T max = var1;
+
+        if (var2.compareTo(max) > 0) {
+            max = var2;
         }
 
-        if (obj3.compareTo(max) > 0) {
-            max = obj3;
+        if (var3.compareTo(max) > 0) {
+            max = var3;
         }
 
         return max;
     }
 
     public static void main(String[] args) {
-        Integer i1 = 10;
-        Integer i2 = 25;
-        Integer i3 = 5;
+        FindMax<Integer> intFindMax = new FindMax<>(10, 25, 5);
+        Integer maxInteger = intFindMax.testMaximum();
+        System.out.println("The maximum Integer value is: " + maxInteger);
 
-        Integer maxInt = findMax(i1, i2, i3);
-        System.out.println("The maximum integer is: " + maxInt);
+        FindMax<Float> floatFindMax = new FindMax<>(10.5f, 25.3f, 5.7f);
+        Float maxFloat = floatFindMax.testMaximum();
+        System.out.println("The maximum Float value is: " + maxFloat);
 
-        Float f1 = 10.5f;
-        Float f2 = 25.3f;
-        Float f3 = 5.7f;
-
-        Float maxFloat = findMax(f1, f2, f3);
-        System.out.println("The maximum float is: " + maxFloat);
-
-        String s1 = "apple";
-        String s2 = "banana";
-        String s3 = "cherry";
-
-        String maxString = findMax(s1, s2, s3);
-        System.out.println("The lexicographically maximum string is: " + maxString);
+        FindMax<String> stringFindMax = new FindMax<>("apple", "banana", "cherry");
+        String maxString = stringFindMax.testMaximum();
+        System.out.println("The lexicographically maximum String is: " + maxString);
     }
 }
